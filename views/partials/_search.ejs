@@ -1,0 +1,20 @@
+<div>
+  <form>
+    <span id='location'>
+      <button id='getLocation'>Get my location</button>
+      <input id="searchTextField" type="text" size="50"></input>
+    </span>
+    <br />
+    <label for='radius'>Within how many km of you? (optional)</label>
+    <input id='radius' min='0' type='number' name='radius'>
+    <br />
+    <label for='keyword'>Type of restaurant (optional)</label>
+    <input id='keyword' placeholder="eg. 'mexican'" name='keyword'>
+    <br />
+    <label>How much do you want to spend (optional)</label>
+    <input id='priceLower' placeholder='More than...' min='0' type='number' name='priceLower'>
+    <input id='priceUpper' placeholder='Less than...' min='0' type='number' name='priceUpper'>
+    <br />
+    <button id='submit'>Find me a restaurant!</button>
+  </form>
+</div>
