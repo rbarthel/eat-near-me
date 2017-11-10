@@ -40,6 +40,27 @@ $(function () {
   const autocomplete = new google.maps.places.Autocomplete(input);
   autocomplete.addListener('place_changed', googleLocation);
 
+  // display price slider
+  $('#price').change(() => {
+    const priceVal = $('#price').val()
+
+    if (priceVal === '0') {
+      $('#displayPrice').text('any')
+    } else {
+      let priceSymbols = '';
+      for (let i = 0; i < Number(priceVal); i++) {
+        priceSymbols += '$';
+      }
+      $('#displayPrice').text(priceSymbols);
+    }
+  })
+
+  // display radius slider
+  $('#radius').change(() => {
+    const radiusVal = $('#radius').val() + ' km';
+    $('#displayRadius').text(radiusVal);
+  })
+
   function queryGoogle(params) {
     console.log(params);
   }
@@ -49,12 +70,12 @@ $(function () {
     if (location !== undefined) {
       const params = {
         location: location,
+        // radius:
         keyword: $('#keyword').val(),
-        priceLower: $('#priceLower').val(),
-        priceUpper: $('#priceUpper').val()
+        // minPriceLevel: $('#priceLower').val(),
+        // maxPriceLevel: $('#priceUpper').val()
       };
       queryGoogle(params);
     }
   });
-
 });
