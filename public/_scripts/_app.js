@@ -38,41 +38,41 @@ $(function () {
   autocomplete.addListener('place_changed', googleLocation);
 
   // set the display for min or max price
-  function setDisplayPrice(price, minOrMax) {
-    let priceSymbols = '';
-    for (let i = 0; i < price; i++) {
-      priceSymbols += '$';
-    }
-    $(`#display${minOrMax}Price`).text(priceSymbols);
-  }
+  // function setDisplayPrice(price, minOrMax) {
+  //   let priceSymbols = '';
+  //   for (let i = 0; i < price; i++) {
+  //     priceSymbols += '$';
+  //   }
+  //   $(`#display${minOrMax}Price`).text(priceSymbols);
+  // }
 
   // handle min price slider change
-  $('#minPrice').change(() => {
-    const minPrice = Number($('#minPrice').val());
-    const maxPrice = Number($('#maxPrice').val());
-    setDisplayPrice(minPrice, 'Min');
-    if (maxPrice > 0 && maxPrice < minPrice) {
-      $('#maxPrice').val(minPrice);
-      setDisplayPrice(minPrice, 'Max');
-    }
-  })
+  // $('#minPrice').change(() => {
+  //   const minPrice = Number($('#minPrice').val());
+  //   const maxPrice = Number($('#maxPrice').val());
+  //   setDisplayPrice(minPrice, 'Min');
+  //   if (maxPrice > 0 && maxPrice < minPrice) {
+  //     $('#maxPrice').val(minPrice);
+  //     setDisplayPrice(minPrice, 'Max');
+  //   }
+  // })
 
   // handle max price slider change
-  $('#maxPrice').change(() => {
-    const minPrice = Number($('#minPrice').val());
-    const maxPrice = Number($('#maxPrice').val());
-    setDisplayPrice(maxPrice, 'Max');
-    if (minPrice > 0 && minPrice > maxPrice) {
-      $('#minPrice').val(maxPrice);
-      setDisplayPrice(maxPrice, 'Min');
-    }
-  })
+  // $('#maxPrice').change(() => {
+  //   const minPrice = Number($('#minPrice').val());
+  //   const maxPrice = Number($('#maxPrice').val());
+  //   setDisplayPrice(maxPrice, 'Max');
+  //   if (minPrice > 0 && minPrice > maxPrice) {
+  //     $('#minPrice').val(maxPrice);
+  //     setDisplayPrice(maxPrice, 'Min');
+  //   }
+  // })
 
   // handle radius slider change and set the display
-  $('#radius').change(() => {
-    radiusVal = $('#radius').val() + ' km';
-    $('#displayRadius').text(radiusVal);
-  })
+  // $('#radius').change(() => {
+  //   radiusVal = $('#radius').val() + ' km';
+  //   $('#displayRadius').text(radiusVal);
+  // })
 
   // get geo location
   function getLocation() {
