@@ -5,7 +5,7 @@ $(function () {
   // if location is already set in session storage
   if (sessionStorage.lat !== undefined) {
     $('#location').hide();
-    location = [sessionStorage.lat, sessionStorage.long];
+    location = [Number(sessionStorage.lat), Number(sessionStorage.long)];
   };
 
   // poll the html5 location api when user clicks get location
@@ -18,7 +18,7 @@ $(function () {
 
   // set the location in local session storage
   function setLocation(lat, long) {
-    location = [lat, long]
+    location = [Number(lat),  Number(long)];
     sessionStorage.lat = lat;
     sessionStorage.long = long;
   }
@@ -29,7 +29,6 @@ $(function () {
     const lat = place.geometry.location.lat();
     const long = place.geometry.location.lng();
     setLocation(lat, long);
-    location = [lat, long];
     $('#location').hide();
   };
 
@@ -84,8 +83,8 @@ $(function () {
         $('#submit').attr('disabled', true);
         $('#location').hide();
         navigator.geolocation.getCurrentPosition((position) => {
-          const lat = Number(position.coords.latitude);
-          const long = Number(position.coords.longitude);
+          const lat = position.coords.latitude;
+          const long = position.coords.longitude;
           setLocation(lat, long);
           resolve();
         }, (error) => {
@@ -98,31 +97,29 @@ $(function () {
     })
   }
 
-  function queryGoogle(params) {
-    return new Promise((resolve, reject) => {
-      resolve(params);
-    });
-  }
-
   // handler for submit
   $('#submit').on('click', (event) => {
+    $('#submit').attr('disabled', true);
     event.preventDefault();
     getLocation().then(() => {
       const params = {
         location: location,
         openNow: $('#openNow').is(':checked'),
-        keyword: $('#keyword').val() || 'restaurant',
-        radius: Number($('#radius').val()) * 1000,
+        keyword: $('#keyword').val(),
+        radius: $('#radius').val() * 1000,
+        minPriceLevel: Number($('#minPrice').val()),
+        maxPriceLevel: Number($('#maxPrice').val())
       };
-      if
-      if (!($('#minPrice').val() === '0' && $('#maxPrice').val() === '4')) {
-        params.minPriceLevel = Number($('#minPrice').val());
-        params.maxPriceLevel = Number($('#maxPrice').val());
-      }
-      queryGoogle(params).then((results) => {
-        $('#submit').removeAttr('disabled');
-        console.log(results);
-      })
+      console.log('params:', params);
+      $.ajax({
+        url: 'http://localhost:8080/search',
+        type: 'POST',
+        data: JSON.stringify(params),
+        contentType: 'application/json',
+        complete: (results) => {
+          console.log('results:', results.responseJSON);
+        }
+      });
     });
   });
 });
