@@ -5,21 +5,33 @@ export function handleParamsChange(content) {
   }
 }
 
-  // handleChange(event) {
-  //   const target = event.target;
-  //   const value = target.type === 'checkbox' ? target.checked : target.value;
-  //   const id = target.id;
+export function getLocation(content) {
+  return {
+    type: 'UPDATE_PARAMS',
+    content
+  }
+}
 
-  //   this.setState({
-  //     [id]: value
-  //   }, () => {
-  //     if (Number(this.state.maxPrice) < Number(this.state.minPrice)) {
-  //       this.setState({
-  //         maxPrice: value,
-  //         minPrice: value
+  // function getLocation() {
+  //   return new Promise((resolve, reject) => {
+  //     if (location) {
+  //       resolve();
+  //     } else {
+  //       $('#submit').attr('disabled', true);
+  //       $('#location').hide();
+  //       navigator.geolocation.getCurrentPosition((position) => {
+  //         const lat = position.coords.latitude;
+  //         const long = position.coords.longitude;
+  //         setLocation(lat, long);
+  //         resolve();
+  //       }, (error) => {
+  //         $.get('http://freegeoip.net/json/', (results) => {
+  //           setLocation(results.latitude, results.longitude);
+  //           resolve();
+  //         });
   //       });
-  //     }
-  //   });
+  //     };
+  //   })
   // }
 
 export default (state = {}, action) => {

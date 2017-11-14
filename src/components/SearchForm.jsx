@@ -10,22 +10,22 @@ export default function SearchForm(props) {
       </span>
       <br />
       <label htmlFor='radius'>How far are you willing to go?</label>
-      <input id='radius' type='range' min='1' max='50' defaultValue={props.params.radius} onChange={event => props.onParamsChange(event.target)}></input>
+      <input id='radius' type='range' min='1' max='50' value={props.params.radius} onChange={event => props.onParamsChange(event.target, props.params)}></input>
       <span id='displayRadius'>{props.params.radius} km</span>
       <br />
       <label htmlFor='minPrice'>Minimum Price</label>
-      <input id='minPrice' type='range' min='0' max='4' defaultValue={props.params.minPrice} onChange={event => props.onParamsChange(event.target)}></input>
+      <input id='minPrice' type='range' min='0' max='4' value={props.params.minPrice} onChange={event => props.onParamsChange(event.target, props.params)}></input>
       <span id='displayMinPrice'>{'$'.repeat(props.params.minPrice)}</span>
       <br />
       <label htmlFor='maxPrice'>Maximum Price</label>
-      <input id='maxPrice' type='range' min='0' max='4' defaultValue={props.params.maxPrice} onChange={event => props.onParamsChange(event.target)}></input>
+      <input id='maxPrice' type='range' min='0' max='4' value={props.params.maxPrice} onChange={event => props.onParamsChange(event.target, props.params)}></input>
       <span id='displayMaxPrice'>{'$'.repeat(props.params.maxPrice)}</span>
       <br />
       <label htmlFor='keyword'>Type of restaurant (optional)</label>
-      <input id='keyword' placeholder="eg. 'pizza'" onChange={event => props.onParamsChange(event.target)}></input>
+      <input id='keyword' placeholder="eg. 'pizza'" value={props.params.keyword} onChange={event => props.onParamsChange(event.target, props.params)}></input>
       <br />
       <label htmlFor='openNow'>Only show places open now</label>
-      <input id='openNow' type='checkbox' defaultChecked={props.params.openNow} onChange={event => props.onParamsChange(event.target)}></input>
+      <input id='openNow' type='checkbox' checked={props.params.openNow} onChange={event => props.onParamsChange(event.target, props.params)}></input>
       <br />
       <button id='submit'>Find me a restaurant!</button>
     </form>
