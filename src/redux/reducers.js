@@ -4,9 +4,9 @@ function params(
   state = {
     locationIsFetching: false,
     location: [],
-    radius: '10',
+    radius: '5',
     minPrice: '0',
-    maxPrice: '4',
+    maxPrice: '0',
     keyword: '',
     openNow: true
   },
@@ -26,7 +26,6 @@ function params(
         locationIsFetching: true
       })
     case 'RECIEVE_GEOLOCATION':
-      console.log(action.content);
       return Object.assign({}, state, {
         ...state.params,
         locationIsFetching: false,
@@ -40,16 +39,28 @@ function params(
 function results(
   state = {
     isFetching: false,
-    results: []
+    restaurants: []
   },
   action
 ) {
   switch(action.type) {
+    case 'REQUEST_RESTAURANTS':
+      return Object.assign({}, state, {
+        ...state.results,
+        isFetching: true
+      })
+    case 'RECIEVE_RESTAURANTS':
+      console.log('action content', action.results);
+      return Object.assign({}, state, {
+        ...state.results,
+        isFetching: false,
+        restaurants: action.results
+      })
     default:
       return state;
   }
 }
 
-const rootReducer = combineReducers({ params });
+const rootReducer = combineReducers({ params, results });
 
 export default rootReducer;

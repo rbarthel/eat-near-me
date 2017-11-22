@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { handleParamsChange, getLocationAutocomplete, fetchGeolocation } from '../redux/actions';
+import { handleParamsChange, getLocationAutocomplete, fetchGeolocation, fetchRestaurants } from '../redux/actions';
 import SearchForm from '../components/SearchForm.jsx';
 
 const mapStateToProps = state => {
@@ -26,6 +26,10 @@ const mapDispatchToProps = dispatch => {
     getLocation: (event) => {
       event.preventDefault();
       dispatch(fetchGeolocation());
+    },
+    handleSubmit: (event, params) => {
+      event.preventDefault();
+      dispatch(fetchRestaurants(params));
     }
   }
 }

@@ -36,7 +36,7 @@ export function getLocationAutocomplete(place) {
   };
 }
 
-export function fetchGeolocation(subreddit) {
+export function fetchGeolocation() {
   return function (dispatch) {
     dispatch(requestGeolocation());
     return navigator.geolocation.getCurrentPosition((position) => {
@@ -47,13 +47,51 @@ export function fetchGeolocation(subreddit) {
         dispatch(recieveGeolocation(results.latitude, results.longitude));
       });
     });
-    // return fetch(`https://www.reddit.com/r/${subreddit}.json`)
-    //   .then(
-    //     response => response.json(),
-    //     error => console.log('try other location api')
-    //   )
-    //   .then(json =>
-    //     dispatch(recieveGeolocation(subreddit, json))
-    //   )
+  }
+}
+
+export function requestRestaurants() {
+  return { type: 'REQUEST_RESTAURANTS' };
+}
+
+export function recieveRestaurants(results) {
+  console.log('rR', results);
+  return {
+    type: 'RECIEVE_RESTAURANTS',
+    results
+  };
+}
+
+export function fetchRestaurants(params) {
+  return function (dispatch) {
+    dispatch(requestRestaurants());
+    const options = {
+      location: params.location,
+      openNow: params.openNow,
+      keyword: params.keyword,
+      radius: params.radius,
+      minPriceLevel: params.minPrice,
+      maxPriceLevel: params.maxPrice
+    };
+    $.ajax({
+      url: 'http://localhost:8080/search',
+      type: 'POST',
+      data: JSON.stringify(params),
+      contentType: 'application/json',
+      complete: (results) => {
+        console.log('results:', results.responseJSON);
+        dispatch(recieveRestaurants(results.responseJSON));
+      }
+    });
+
+    // dispatch(requestGeolocation());
+    // return navigator.geolocation.getCurrentPosition((position) => {
+    //   dispatch(recieveGeolocation(position.coords.latitude, position.coords.longitude));
+    // }, (error) => {
+    //   $.get('http://freegeoip.net/json/', (results) => {
+    //     console.log(results);
+    //     dispatch(recieveGeolocation(results.latitude, results.longitude));
+    //   });
+    // });
   }
 }
