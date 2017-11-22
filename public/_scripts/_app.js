@@ -24,18 +24,18 @@ $(function () {
   }
 
   // get location via google places autocomplete
-  function googleLocation() {
-    const place = autocomplete.getPlace();
-    const lat = place.geometry.location.lat();
-    const long = place.geometry.location.lng();
-    setLocation(lat, long);
-    $('#location').hide();
-  };
+  // function googleLocation() {
+  //   const place = autocomplete.getPlace();
+  //   const lat = place.geometry.location.lat();
+  //   const long = place.geometry.location.lng();
+  //   setLocation(lat, long);
+  //   $('#location').hide();
+  // };
 
   // set up google autocomplete listener
-  const input = document.getElementById('searchTextField');
-  const autocomplete = new google.maps.places.Autocomplete(input);
-  autocomplete.addListener('place_changed', googleLocation);
+  // const input = document.getElementById('searchTextField');
+  // const autocomplete = new google.maps.places.Autocomplete(input);
+  // autocomplete.addListener('place_changed', googleLocation);
 
   // set the display for min or max price
   // function setDisplayPrice(price, minOrMax) {

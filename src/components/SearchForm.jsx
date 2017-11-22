@@ -4,7 +4,7 @@ export default function SearchForm(props) {
   return (
     <form onSubmit={props.handleSubmit}>
       <span id='location'>
-        <button id='getLocation'>Get my location</button>
+        <button id='getLocation' onClick={event => props.getLocation(event)}>Get my location</button>
         or
         <input id='searchTextField' placeholder='Enter my location...' type='text' size='50'></input>
       </span>
