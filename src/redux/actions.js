@@ -37,15 +37,38 @@ export function getLocationAutocomplete(place) {
 }
 
 export function fetchGeolocation() {
-  return function (dispatch) {
+  return (dispatch) => {
     dispatch(requestGeolocation());
     return navigator.geolocation.getCurrentPosition((position) => {
       dispatch(recieveGeolocation(position.coords.latitude, position.coords.longitude));
     }, (error) => {
       $.get('http://freegeoip.net/json/', (results) => {
-        console.log(results);
         dispatch(recieveGeolocation(results.latitude, results.longitude));
       });
+    });
+  }
+}
+
+export function displayRestaurant(restaurant) {
+  return {
+    type: 'DISPLAY_RESTAURANT',
+    restaurant
+  };
+}
+
+export function chooseRestaurant() {
+  return (dispatch, getState) => {
+    const max = getState().results.restaurants.length;
+    const chosen = Math.floor(Math.random() * (max - 0)) + 0;
+    const place_id = getState().results.restaurants[chosen].place_id;
+    $.ajax({
+      url: 'http://localhost:8080/details',
+      type: 'POST',
+      data: JSON.stringify({place_id: place_id}),
+      contentType: 'application/json',
+      complete: (results) => {
+        dispatch(displayRestaurant(results.responseJSON));
+      }
     });
   }
 }
@@ -55,7 +78,6 @@ export function requestRestaurants() {
 }
 
 export function recieveRestaurants(results) {
-  console.log('rR', results);
   return {
     type: 'RECIEVE_RESTAURANTS',
     results
@@ -63,7 +85,7 @@ export function recieveRestaurants(results) {
 }
 
 export function fetchRestaurants(params) {
-  return function (dispatch) {
+  return (dispatch) => {
     dispatch(requestRestaurants());
     const options = {
       location: params.location,
@@ -79,19 +101,9 @@ export function fetchRestaurants(params) {
       data: JSON.stringify(params),
       contentType: 'application/json',
       complete: (results) => {
-        console.log('results:', results.responseJSON);
         dispatch(recieveRestaurants(results.responseJSON));
+        dispatch(chooseRestaurant());
       }
     });
-
-    // dispatch(requestGeolocation());
-    // return navigator.geolocation.getCurrentPosition((position) => {
-    //   dispatch(recieveGeolocation(position.coords.latitude, position.coords.longitude));
-    // }, (error) => {
-    //   $.get('http://freegeoip.net/json/', (results) => {
-    //     console.log(results);
-    //     dispatch(recieveGeolocation(results.latitude, results.longitude));
-    //   });
-    // });
   }
 }

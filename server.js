@@ -31,12 +31,10 @@ app.post('/search', (req, res) => {
     params.minprice = Number(req.body.minPrice);
     params.maxprice = Number(req.body.maxPrice);
   };
-  console.log('params', params);
 
   googleMapsClient.placesNearby(params)
     .asPromise()
     .then((response) => {
-      console.log(response.json);
       res.json(response.json.results);
     })
     .catch((err) => {
@@ -44,6 +42,18 @@ app.post('/search', (req, res) => {
       res.status(500);
     });
 });
+
+app.post('/details', (req, res) => {
+  googleMapsClient.place({placeid: req.body.place_id})
+    .asPromise()
+    .then((response) => {
+      res.json(response.json.result);
+    })
+    .catch((err) => {
+      console.error('Google Places API error: ', err);
+      res.status(500);
+    });
+})
 
 // Home page
 // app.get('/', (req, res) => {

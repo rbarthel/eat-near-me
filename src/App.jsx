@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
 
 import Search from './containers/Search.jsx';
+import Display from './containers/Display.jsx';
 
 class App extends Component {
   render() {
     return (
-      <Search />
+      <div>
+        <Search />
+        <Display />
+      </div>
     );
   }
 }

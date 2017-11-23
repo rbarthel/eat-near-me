@@ -39,7 +39,8 @@ function params(
 function results(
   state = {
     isFetching: false,
-    restaurants: []
+    restaurants: [],
+    display: {}
   },
   action
 ) {
@@ -50,11 +51,15 @@ function results(
         isFetching: true
       })
     case 'RECIEVE_RESTAURANTS':
-      console.log('action content', action.results);
+      return Object.assign({}, state, {
+        ...state.results,
+        restaurants: action.results
+      })
+    case 'DISPLAY_RESTAURANT':
       return Object.assign({}, state, {
         ...state.results,
         isFetching: false,
-        restaurants: action.results
+        display: action.restaurant
       })
     default:
       return state;

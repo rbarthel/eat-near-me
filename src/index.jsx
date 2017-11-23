@@ -14,21 +14,6 @@ const store = createStore(reducers,
     , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
-// {
-  // location: sessionStorage.lat !== undefined ? [Number(sessionStorage.lat), Number(sessionStorage.long)] : [],
-  // params: {
-  //   locationIsFetching: false,
-  //   location: [],
-  //   radius: '10',
-  //   minPrice: '0',
-  //   maxPrice: '4',
-  //   keyword: '',
-  //   openNow: true
-  // },
-  // results: [],
-  // display: {}
-// },
-
 
 ReactDOM.render(
   <Provider store={ store }>

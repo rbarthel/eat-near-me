@@ -5,7 +5,7 @@ export default function SearchForm(props) {
     <form onSubmit={event => props.handleSubmit(event, props.params)}>
       <span id='location'>
         <button id='getLocation' onClick={event => props.getLocation(event)}>Get my location</button>
-        or
+        &nbsp;or&nbsp;
         <input id='searchTextField' placeholder='Enter my location...' type='text' size='50'></input>
       </span>
       <br />
