@@ -49,6 +49,7 @@ function params(
 
 function results(
   state = {
+    noResults: false,
     isFetching: false,
     restaurants: [],
     display: {}
@@ -69,8 +70,16 @@ function results(
     case 'DISPLAY_RESTAURANT':
       return Object.assign({}, state, {
         ...state.results,
+        noResults: false,
         isFetching: false,
         display: action.restaurant
+      })
+    case 'NO_RESULTS':
+      return Object.assign({}, state, {
+        ...state.results,
+        noResults: true,
+        isFetching: false,
+        display: {}
       })
     default:
       return state;

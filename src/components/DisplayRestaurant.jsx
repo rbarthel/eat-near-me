@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function DisplayRestaurant(props) {
-  const test = (Object.keys(props.display).length !== 0 ? props.display.name : '');
   let restuarant;
   if (Object.keys(props.display).length !== 0) {
     restuarant = (

@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { chooseRestaurant } from '../redux/actions';
 import DisplayRestaurant from '../components/DisplayRestaurant.jsx';
+import NoResults from '../components/NoResults.jsx';
 
 const mapStateToProps = state => {
-  return {
-    display: state.results.display
-  }
+  return state.results;
 }
 
 const mapDispatchToProps = dispatch => {
@@ -22,7 +21,10 @@ class Display extends Component {
 
   render() {
     return (
-      <DisplayRestaurant { ...this.props } />
+      <div>
+        <NoResults display={ this.props.noResults }/>
+        <DisplayRestaurant { ...this.props } />
+      </div>
     )
   }
 }
