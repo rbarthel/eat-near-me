@@ -11,6 +11,24 @@ export function requestGeolocation() {
   return { type: 'REQUEST_GEOLOCATION' };
 }
 
+export function waitingForGeolocation() {
+  return { type: 'WAITING_FOR_GEOLOCATION' };
+}
+
+export function notWaitingForGeolocation() {
+  return { type: 'NOT_WAITING_FOR_GEOLOCATION' };
+}
+
+export function recieveGeolocationTrigger(lat, lng) {
+  return (dispatch, getState) => {
+    dispatch(recieveGeolocation(lat, lng));
+    if (getState().params.waitingForGeolocation) {
+      dispatch(notWaitingForGeolocation());
+      dispatch(fetchRestaurants());
+    }
+  }
+}
+
 export function recieveGeolocation(lat, lng) {
   const content = {
     lat: lat,
@@ -40,10 +58,10 @@ export function fetchGeolocation() {
   return (dispatch) => {
     dispatch(requestGeolocation());
     return navigator.geolocation.getCurrentPosition((position) => {
-      dispatch(recieveGeolocation(position.coords.latitude, position.coords.longitude));
+      dispatch(recieveGeolocationTrigger(position.coords.latitude, position.coords.longitude));
     }, (error) => {
       $.get('http://freegeoip.net/json/', (results) => {
-        dispatch(recieveGeolocation(results.latitude, results.longitude));
+        dispatch(recieveGeolocationTrigger(results.latitude, results.longitude));
       });
     });
   }
@@ -84,9 +102,24 @@ export function recieveRestaurants(results) {
   };
 }
 
-export function fetchRestaurants(params) {
-  return (dispatch) => {
+export function fetchRestaurantsButton() {
+  return (dispatch, getState) => {
+    const params = getState().params;
+    if (params.locationIsFetching) {
+      dispatch(waitingForGeolocation());
+    } else if (params.location.length === 2) {
+      dispatch(fetchRestaurants());
+    } else {
+      dispatch(waitingForGeolocation());
+      dispatch(fetchGeolocation());
+    }
+  }
+}
+
+export function fetchRestaurants() {
+  return (dispatch, getState) => {
     dispatch(requestRestaurants());
+    const params = getState().params;
     const options = {
       location: params.location,
       openNow: params.openNow,

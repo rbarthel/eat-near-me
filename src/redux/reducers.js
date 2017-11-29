@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 function params(
   state = {
+    waitingForGeolocation: false,
     locationIsFetching: false,
     location: [],
     radius: '5',
@@ -19,6 +20,16 @@ function params(
       return Object.assign({}, state, {
         ...state.params,
         [target.id]: value
+      })
+    case 'WAITING_FOR_GEOLOCATION':
+      return Object.assign({}, state, {
+        ...state.params,
+        waitingForGeolocation: true
+      })
+    case 'NOT_WAITING_FOR_GEOLOCATION':
+      return Object.assign({}, state, {
+        ...state.params,
+        waitingForGeolocation: false
       })
     case 'REQUEST_GEOLOCATION':
       return Object.assign({}, state, {

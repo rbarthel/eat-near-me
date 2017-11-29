@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function SearchForm(props) {
   return (
-    <form onSubmit={event => props.handleSubmit(event, props.params)}>
+    <form onSubmit={event => props.handleSubmit(event)}>
       <span id='location'>
         <button id='getLocation' onClick={event => props.getLocation(event)}>Get my location</button>
         &nbsp;or&nbsp;
