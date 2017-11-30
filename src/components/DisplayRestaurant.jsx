@@ -6,15 +6,17 @@ export default function DisplayRestaurant(props) {
     restuarant = (
       <div>
         <br />
-        Name: {props.display.name}
+        {props.display.name}
         <br />
-        {props.display.formatted_address}
+        {props.display.vicinity}
         <br />
         {props.display.formatted_phone_number} <a href={props.display.website} target='_blank'>Website</a>
         <br />
         Rating: {props.display.rating} {'⭐ '.repeat(Math.round(props.display.rating))}
         <br />
         Open Now: {props.display.opening_hours.open_now ? 'Yes' : 'No'}
+        <br />
+        <a href={props.display.url} target='_blank'>Directions</a>
         <br />
         <button onClick={event => props.newRestaurant(event)}>Choose another</button>
       </div>
