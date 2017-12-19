@@ -75,23 +75,45 @@ export function chooseRestaurant() {
   return (dispatch, getState) => {
     const max = getState().results.restaurants.length;
     if (max === 0) {
-      dispatch(displayRestaurant({})); // does this need to be here?
       dispatch(noResults());
     } else {
       const chosen = Math.floor(Math.random() * (max - 0)) + 0;
       const place_id = getState().results.restaurants[chosen].place_id;
-      $.ajax({
-        url: 'http://localhost:8080/details',
-        type: 'POST',
-        data: JSON.stringify({place_id: place_id}),
-        contentType: 'application/json',
-        complete: (results) => {
-          dispatch(displayRestaurant(results.responseJSON));
-        }
-      });
+      dispatch(displayRestaurant(place_id));
+      // $.ajax({
+      //   url: 'http://localhost:8080/details',
+      //   type: 'POST',
+      //   data: JSON.stringify({place_id: place_id}),
+      //   contentType: 'application/json',
+      //   complete: (results) => {
+      //     dispatch(displayRestaurant(results.responseJSON));
+      //   }
+      // });
     }
   }
 }
+
+// export function chooseRestaurant() {
+//   return (dispatch, getState) => {
+//     const max = getState().results.restaurants.length;
+//     if (max === 0) {
+//       // dispatch(displayRestaurant({}));
+//       dispatch(noResults());
+//     } else {
+//       const chosen = Math.floor(Math.random() * (max - 0)) + 0;
+//       const place_id = getState().results.restaurants[chosen].place_id;
+//       $.ajax({
+//         url: 'http://localhost:8080/details',
+//         type: 'POST',
+//         data: JSON.stringify({place_id: place_id}),
+//         contentType: 'application/json',
+//         complete: (results) => {
+//           dispatch(displayRestaurant(results.responseJSON));
+//         }
+//       });
+//     }
+//   }
+// }
 
 export function requestRestaurants() {
   return { type: 'REQUEST_RESTAURANTS' };
