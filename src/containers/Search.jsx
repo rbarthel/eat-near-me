@@ -4,9 +4,7 @@ import { handleParamsChange, getLocationAutocomplete, fetchGeolocation, fetchRes
 import SearchForm from '../components/SearchForm.jsx';
 
 const mapStateToProps = state => {
-  return {
-    params: state.params
-  }
+  return state;
 }
 
 const mapDispatchToProps = dispatch => {

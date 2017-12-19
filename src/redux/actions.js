@@ -21,7 +21,7 @@ export function notWaitingForGeolocation() {
 
 export function recieveGeolocationTrigger(lat, lng) {
   return (dispatch, getState) => {
-    dispatch(recieveGeolocation(lat, lng));
+    dispatch(recieveGeolocation(lat, lng, true));
     if (getState().params.waitingForGeolocation) {
       dispatch(notWaitingForGeolocation());
       dispatch(fetchRestaurants());
@@ -29,10 +29,11 @@ export function recieveGeolocationTrigger(lat, lng) {
   }
 }
 
-export function recieveGeolocation(lat, lng) {
+export function recieveGeolocation(lat, lng, locationDisabled) {
   const content = {
     lat: lat,
-    lng: lng
+    lng: lng,
+    locationDisabled: locationDisabled
   }
   return {
     type: 'RECIEVE_GEOLOCATION',
@@ -41,17 +42,9 @@ export function recieveGeolocation(lat, lng) {
 }
 
 export function getLocationAutocomplete(place) {
-  const content = {
-    id: 'location',
-    value: [
-      place.geometry.location.lat(),
-      place.geometry.location.lng()
-    ]
-  };
-  return {
-    type: 'UPDATE_PARAMS',
-    content
-  };
+  return (dispatch) => {
+    dispatch(recieveGeolocation(place.geometry.location.lat(), place.geometry.location.lng(), false));
+  }
 }
 
 export function fetchGeolocation() {
@@ -82,7 +75,7 @@ export function chooseRestaurant() {
   return (dispatch, getState) => {
     const max = getState().results.restaurants.length;
     if (max === 0) {
-      dispatch(displayRestaurant({}));
+      dispatch(displayRestaurant({})); // does this need to be here?
       dispatch(noResults());
     } else {
       const chosen = Math.floor(Math.random() * (max - 0)) + 0;
@@ -113,6 +106,7 @@ export function recieveRestaurants(results) {
 
 export function fetchRestaurantsButton() {
   return (dispatch, getState) => {
+    dispatch(requestRestaurants());
     const params = getState().params;
     if (params.locationIsFetching) {
       dispatch(waitingForGeolocation());
@@ -127,7 +121,6 @@ export function fetchRestaurantsButton() {
 
 export function fetchRestaurants() {
   return (dispatch, getState) => {
-    dispatch(requestRestaurants());
     const params = getState().params;
     const options = {
       location: params.location,

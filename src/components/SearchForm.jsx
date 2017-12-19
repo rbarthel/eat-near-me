@@ -4,9 +4,9 @@ export default function SearchForm(props) {
   return (
     <form onSubmit={event => props.handleSubmit(event)}>
       <span id='location'>
-        <button id='getLocation' onClick={event => props.getLocation(event)}>Get my location</button>
+        <button id='getLocation' disabled={props.params.locationDisabled} onClick={event => props.getLocation(event)}>Get my location</button>
         &nbsp;or&nbsp;
-        <input id='searchTextField' placeholder='Enter my location...' type='text' size='50'></input>
+        <input id='searchTextField' placeholder={props.params.autocompletePlaceholder} type='text' size='50'></input>
       </span>
       <br />
       <label htmlFor='radius'>How far are you willing to go?</label>
@@ -27,7 +27,7 @@ export default function SearchForm(props) {
       <label htmlFor='openNow'>Only show places open now</label>
       <input id='openNow' type='checkbox' checked={props.params.openNow} onChange={event => props.onParamsChange(event.target, props.params)}></input>
       <br />
-      <button id='submit'>Find me a restaurant!</button>
+      <button id='submit' disabled={props.results.isFetching}>Find me a restaurant!</button>
     </form>
   )
 }

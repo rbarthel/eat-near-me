@@ -2,8 +2,11 @@ import { combineReducers } from 'redux';
 
 function params(
   state = {
+    autocompletePlaceholder: 'Enter my location...',
+    waitingForResults: false,
     waitingForGeolocation: false,
     locationIsFetching: false,
+    locationDisabled: false,
     location: [],
     radius: '5',
     minPrice: '0',
@@ -34,13 +37,16 @@ function params(
     case 'REQUEST_GEOLOCATION':
       return Object.assign({}, state, {
         ...state.params,
-        locationIsFetching: true
+        locationIsFetching: true,
+        locationDisabled: true
       })
     case 'RECIEVE_GEOLOCATION':
       return Object.assign({}, state, {
         ...state.params,
         locationIsFetching: false,
-        location: [action.content.lat, action.content.lng]
+        location: [action.content.lat, action.content.lng],
+        locationDisabled: action.content.locationDisabled,
+        autocompletePlaceholder: 'My current location'
       })
     default:
       return state;
