@@ -2,13 +2,14 @@ import { combineReducers } from 'redux';
 
 function params(
   state = {
+    displayOptions: false,
     autocompletePlaceholder: 'Enter my location...',
     waitingForResults: false,
     waitingForGeolocation: false,
     locationIsFetching: false,
     locationDisabled: false,
     location: [],
-    radius: '5',
+    radius: '10',
     minPrice: '0',
     maxPrice: '0',
     keyword: '',

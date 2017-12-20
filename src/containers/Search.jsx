@@ -28,6 +28,10 @@ const mapDispatchToProps = dispatch => {
     handleSubmit: (event) => {
       event.preventDefault();
       dispatch(fetchRestaurantsButton());
+    },
+    toggleOptions: (event, params) => {
+      event.preventDefault();
+      dispatch(handleParamsChange({id: 'displayOptions', value: !params.displayOptions}))
     }
   }
 }

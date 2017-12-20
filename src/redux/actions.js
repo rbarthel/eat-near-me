@@ -60,6 +60,14 @@ export function fetchGeolocation() {
   }
 }
 
+// export function toggleOptions() {
+//   return (dispatch, getState) => {
+//     dispatch(handleParamsChange({id: 'displayOptions', value}))
+
+//     !getState().params.displayOptions
+//   }
+// }
+
 export function displayRestaurant(restaurant) {
   return {
     type: 'DISPLAY_RESTAURANT',
@@ -80,15 +88,6 @@ export function chooseRestaurant() {
       const chosen = Math.floor(Math.random() * (max - 0)) + 0;
       const place_id = getState().results.restaurants[chosen].place_id;
       dispatch(displayRestaurant(place_id));
-      // $.ajax({
-      //   url: 'http://localhost:8080/details',
-      //   type: 'POST',
-      //   data: JSON.stringify({place_id: place_id}),
-      //   contentType: 'application/json',
-      //   complete: (results) => {
-      //     dispatch(displayRestaurant(results.responseJSON));
-      //   }
-      // });
     }
   }
 }
@@ -158,6 +157,7 @@ export function fetchRestaurants() {
       data: JSON.stringify(params),
       contentType: 'application/json',
       complete: (results) => {
+        dispatch(handleParamsChange({id: 'displayOptions', value: false}));
         dispatch(recieveRestaurants(results.responseJSON));
         dispatch(chooseRestaurant());
       }

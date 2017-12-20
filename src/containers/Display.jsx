@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { chooseRestaurant } from '../redux/actions';
 import DisplayRestaurant from '../components/DisplayRestaurant.jsx';
 import NoResults from '../components/NoResults.jsx';
+import WelcomeMessage from '../components/WelcomeMessage.jsx';
 
 const mapStateToProps = state => {
   return state.results;
@@ -24,6 +25,7 @@ class Display extends Component {
       <div>
         <NoResults display={ this.props.noResults }/>
         <DisplayRestaurant { ...this.props } />
+        <WelcomeMessage display={ !Object.keys(this.props.display).length && !this.props.noResults }/>
       </div>
     )
   }
