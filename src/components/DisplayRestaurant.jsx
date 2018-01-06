@@ -5,12 +5,7 @@ export default function DisplayRestaurant(props) {
   let restuarant;
   if (Object.keys(props.display).length !== 0) {
     restuarant = (
-      <div>
-        <br />
-        <button onClick={event => props.newRestaurant(event)}>Choose another</button>
-        <br />
-        <iframe src={mapsiframe} width='500' height='500'></iframe>
-      </div>
+      <iframe src={mapsiframe} frameBorder='0' id='mapsiframe'></iframe>
     )
   }
 

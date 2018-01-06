@@ -1,0 +1,39 @@
+.banner {
+  background-color: #D32F2F;
+  color: #ffffff;
+  height: 100px;
+  .bannerInner {
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    .title {
+      margin: 0;
+      padding: 0;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .chooseAnother {
+    cursor: pointer;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background-color: #D32F2F;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    font-weight: 700;
+    &:hover {
+      background-color: #ffffff;
+      color: #D32F2F;
+    }
+    &:focus {
+      outline: 0;
+    }
+    &:active {
+      border: 2px solid #D32F2F;
+    }
+  }
+}

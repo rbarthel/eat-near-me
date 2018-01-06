@@ -1,4 +1,5 @@
 node_modules
 .DS_Store
 .env
-_old.js
+notes.txt
+npm-debug.log

@@ -88,6 +88,11 @@ function results(
         isFetching: false,
         display: {}
       })
+    case 'SEARCH_AGAIN':
+      return Object.assign({}, state, {
+        ...state.results,
+        display: {}
+      })
     default:
       return state;
   }

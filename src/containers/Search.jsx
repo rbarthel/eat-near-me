@@ -49,7 +49,7 @@ class Search extends Component {
 
   render() {
     return (
-      <SearchForm { ...this.props } />
+      <SearchForm { ...this.props }/>
     )
   }
 }

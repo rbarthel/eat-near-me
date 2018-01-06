@@ -1,4 +1,4 @@
-// require("../styles/application.scss");
+require("../styles/main.scss");
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -11,7 +11,7 @@ import App from './App.jsx';
 
 const store = createStore(reducers,
   compose(applyMiddleware(thunkMiddleware)
-    , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    // , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() //comment this line out for testing on other devices
   )
 );
 

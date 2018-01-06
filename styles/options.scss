@@ -1,0 +1,38 @@
+.searchForm {
+  padding-top: 5vh;
+  .displayOptions {
+    background-color: #e8e8e8;
+    /* for desktop only ⇩ */
+    margin: 10px auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 450px;
+    #location {
+      display: flex;
+      width: 100%;
+      #getLocation {
+        cursor: pointer;
+        border-radius: 4px;
+        background-color: #ffffff;
+        border: 2px solid #bfbfbf;
+        &:hover {
+          background-color: #e8e8e8;
+        }
+        &:focus {
+          outline: 0;
+        }
+      }
+      #searchTextField {
+        flex-grow: 1;
+      }
+    }
+    .textField {
+      border-radius: 4px;
+      border: 2px solid #bfbfbf;
+      padding: 1px 4px;
+    }
+    #openNow {
+
+    }
+  }
+}

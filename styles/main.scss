@@ -1,0 +1,44 @@
+@import 'options';
+@import 'banner';
+
+body {
+  background-color: #ffffff;
+  font-family: "Helvetica Neue", Helvetica;
+  margin: 0;
+  .contentContainer {
+    text-align: center;
+  }
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.mainButtons {
+  cursor: pointer;
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background-color: #e8e8e8;
+  border: 0;
+  font-weight: 700;
+  border: 2px solid #bfbfbf;
+  &:hover {
+    background-color: #ffffff;
+  }
+  &:focus {
+    outline: 0;
+  }
+}
+
+#mapsiframe {
+  width: 100%;
+  height: calc(100vh - 100px);
+  position: absolute;
+  transform: translate(-50%);
+  /*filter: grayscale(33%);*/
+}
+
+
+
+

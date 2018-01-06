@@ -79,6 +79,10 @@ export function noResults() {
   return { type: 'NO_RESULTS' };
 }
 
+export function searchAgain() {
+  return { type: 'SEARCH_AGAIN' };
+}
+
 export function chooseRestaurant() {
   return (dispatch, getState) => {
     const max = getState().results.restaurants.length;
@@ -157,7 +161,7 @@ export function fetchRestaurants() {
       data: JSON.stringify(params),
       contentType: 'application/json',
       complete: (results) => {
-        dispatch(handleParamsChange({id: 'displayOptions', value: false}));
+        // dispatch(handleParamsChange({id: 'displayOptions', value: false}));
         dispatch(recieveRestaurants(results.responseJSON));
         dispatch(chooseRestaurant());
       }
