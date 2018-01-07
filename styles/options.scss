@@ -1,8 +1,6 @@
 .searchForm {
-  padding-top: 5vh;
   .displayOptions {
-    background-color: #e8e8e8;
-    /* for desktop only ⇩ */
+    background-color: $secondary-colour;
     margin: 10px auto;
     padding: 20px;
     border-radius: 5px;
@@ -13,13 +11,19 @@
       #getLocation {
         cursor: pointer;
         border-radius: 4px;
-        background-color: #ffffff;
-        border: 2px solid #bfbfbf;
+        background-color: $primary-colour;
+        border: 2px solid $border-colour;
         &:hover {
-          background-color: #e8e8e8;
+          background-color: $secondary-colour;
         }
         &:focus {
           outline: 0;
+        }
+        &:disabled {
+          cursor: default;
+          &:hover {
+            background-color: $primary-colour;
+          }
         }
       }
       #searchTextField {
@@ -28,11 +32,8 @@
     }
     .textField {
       border-radius: 4px;
-      border: 2px solid #bfbfbf;
+      border: 2px solid $border-colour;
       padding: 1px 4px;
-    }
-    #openNow {
-
     }
   }
 }

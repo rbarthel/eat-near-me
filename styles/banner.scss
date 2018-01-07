@@ -1,6 +1,6 @@
 .banner {
-  background-color: #D32F2F;
-  color: #ffffff;
+  background-color: $accent-colour;
+  color: $primary-colour;
   height: 100px;
   .bannerInner {
     height: 100%;
@@ -21,19 +21,19 @@
     font-size: 12px;
     padding: 4px 8px;
     border-radius: 6px;
-    background-color: #D32F2F;
-    border: 2px solid #ffffff;
-    color: #ffffff;
+    background-color: $accent-colour;
+    border: 2px solid $primary-colour;
+    color: $primary-colour;
     font-weight: 700;
     &:hover {
-      background-color: #ffffff;
-      color: #D32F2F;
+      background-color: $primary-colour;
+      color: $accent-colour;
     }
     &:focus {
       outline: 0;
     }
     &:active {
-      border: 2px solid #D32F2F;
+      border: 2px solid $accent-colour;
     }
   }
 }

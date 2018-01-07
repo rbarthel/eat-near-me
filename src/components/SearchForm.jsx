@@ -9,9 +9,9 @@ export default function SearchForm(props) {
         <button className='mainButtons' onClick={event => props.toggleOptions(event, props.params)}>Options ▼</button>
         <div style={{ display: props.params.displayOptions ? 'block' : 'none'}} className='displayOptions'>
           <span id='location'>
-            <button id='getLocation' disabled={props.params.locationDisabled} onClick={event => props.getLocation(event)}>Get my location</button>
+            <button id='getLocation' disabled={props.params.locationDisabled} onClick={event => props.getLocation(event)}>{props.params.buttonText}</button>
             &nbsp;or&nbsp;
-            <input className='textField' id='searchTextField' placeholder={props.params.autocompletePlaceholder} type='text'></input>
+            <input className='textField' id='searchTextField' placeholder='Enter my location...' type='text'></input>
           </span>
           <label htmlFor='radius'>How far are you willing to go?</label>&nbsp;
           <input id='radius' type='range' min='1' max='50' value={props.params.radius} onChange={event => props.onParamsChange(event.target, props.params)}></input>

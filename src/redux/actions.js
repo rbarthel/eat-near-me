@@ -60,14 +60,6 @@ export function fetchGeolocation() {
   }
 }
 
-// export function toggleOptions() {
-//   return (dispatch, getState) => {
-//     dispatch(handleParamsChange({id: 'displayOptions', value}))
-
-//     !getState().params.displayOptions
-//   }
-// }
-
 export function displayRestaurant(restaurant) {
   return {
     type: 'DISPLAY_RESTAURANT',

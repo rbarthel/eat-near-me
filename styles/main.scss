@@ -1,9 +1,13 @@
+@import 'variables';
+
 @import 'options';
 @import 'banner';
+@import 'spinner';
+
 
 body {
-  background-color: #ffffff;
-  font-family: "Helvetica Neue", Helvetica;
+  background-color: $primary-colour;
+  font-family: 'Helvetica Neue', Helvetica;
   margin: 0;
   .contentContainer {
     text-align: center;
@@ -19,12 +23,12 @@ body {
   font-size: 14px;
   padding: 6px 10px;
   border-radius: 6px;
-  background-color: #e8e8e8;
+  background-color: $secondary-colour;
   border: 0;
   font-weight: 700;
-  border: 2px solid #bfbfbf;
+  border: 2px solid $border-colour;
   &:hover {
-    background-color: #ffffff;
+    background-color: $primary-colour;
   }
   &:focus {
     outline: 0;

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleParamsChange, getLocationAutocomplete, fetchGeolocation, fetchRestaurantsButton } from '../redux/actions';
 import SearchForm from '../components/SearchForm.jsx';
+import DisplaySpinner from '../components/DisplaySpinner.jsx';
 
 const mapStateToProps = state => {
   return state;
@@ -49,7 +50,10 @@ class Search extends Component {
 
   render() {
     return (
-      <SearchForm { ...this.props }/>
+      <div>
+        <DisplaySpinner { ...this.props.results }/>
+        <SearchForm { ...this.props }/>
+      </div>
     )
   }
 }

@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 function params(
   state = {
     displayOptions: false,
-    autocompletePlaceholder: 'Enter my location...',
+    buttonText: 'Find my location',
     waitingForResults: false,
     waitingForGeolocation: false,
     locationIsFetching: false,
@@ -47,7 +47,7 @@ function params(
         locationIsFetching: false,
         location: [action.content.lat, action.content.lng],
         locationDisabled: action.content.locationDisabled,
-        autocompletePlaceholder: 'My current location'
+        buttonText: action.content.locationDisabled ? 'Current location ✔' : 'Find my location',
       })
     default:
       return state;
