@@ -1,4 +1,4 @@
-require("../styles/main.scss");
+require('../styles/main.scss');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -18,4 +18,5 @@ const store = createStore(reducers,
 ReactDOM.render(
   <Provider store={ store }>
     <App />
-  </Provider>, document.getElementById('react-root'));
+  </Provider>, document.getElementById('react-root')
+);

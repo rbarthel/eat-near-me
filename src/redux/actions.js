@@ -53,6 +53,7 @@ export function fetchGeolocation() {
     return navigator.geolocation.getCurrentPosition((position) => {
       dispatch(recieveGeolocationTrigger(position.coords.latitude, position.coords.longitude));
     }, (error) => {
+      console.log('Geolocation error, falling back to ip location.');
       $.get('http://freegeoip.net/json/', (results) => {
         dispatch(recieveGeolocationTrigger(results.latitude, results.longitude));
       });
@@ -148,7 +149,7 @@ export function fetchRestaurants() {
       maxPriceLevel: params.maxPrice
     };
     $.ajax({
-      url: 'http://localhost:8080/search',
+      url: 'http://192.168.1.75:8080/search',
       type: 'POST',
       data: JSON.stringify(params),
       contentType: 'application/json',

@@ -7,11 +7,12 @@
 
 body {
   background-color: $primary-colour;
-  font-family: 'Helvetica Neue', Helvetica;
+  font-family: 'Helvetica Neue', 'Helvetica';
   margin: 0;
-  .contentContainer {
-    text-align: center;
-  }
+}
+
+.contentContainer {
+  text-align: center;
 }
 
 .hidden {
@@ -37,7 +38,7 @@ body {
 
 #mapsiframe {
   width: 100%;
-  height: calc(100vh - 100px);
+  height: calc(100% - 100px);
   position: absolute;
   transform: translate(-50%);
   /*filter: grayscale(33%);*/

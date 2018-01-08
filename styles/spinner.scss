@@ -1,16 +1,21 @@
 // https://github.com/eisenfox/css-spinners
 
-//variables
-$bg-color: $primary-colour; //container background-color;
-$basic-dark-color: $border-colour; //color of the spinner
+$basic-dark-color: $accent-colour; //color of the spinner
 $border-width: 4px; //width of spinners border
 $basic-spinner-dimensions: 100px; //width and height of spinner
 $main-spinner-dimensions: $basic-spinner-dimensions - $border-width * 2; //width and height of bigger circle
 $small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of smaller circle
 
-// spinner style
+.spinnerContainer {
+  position: fixed;
+  z-index: 100;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .spinner {
-  margin: 5vh auto;
+  margin: 0 auto;
 
   position: relative;
   width: $basic-spinner-dimensions;

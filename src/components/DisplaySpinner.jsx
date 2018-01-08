@@ -4,11 +4,12 @@ export default function DisplaySpinner(props) {
   let spinner;
   if (Object.keys(props.display).length === 0) {
     spinner = (
-      <div className='spinner' style={{ visibility: props.isFetching ? 'visible' : 'hidden' }}></div>
+      <div className='spinner' style={{ display: props.isFetching ? 'block' : 'none' }}></div>
     )
   }
+
   return (
-    <div>
+    <div className='spinnerContainer'>
       { spinner }
     </div>
   )
