@@ -12,6 +12,7 @@ export default function DisplayRestaurant(props) {
   return (
     <div>
       {restuarant}
+      <div id='googleMapsAttributions'></div>
     </div>
   )
 }

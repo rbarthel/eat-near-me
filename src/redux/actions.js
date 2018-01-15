@@ -53,10 +53,22 @@ export function fetchGeolocation() {
     return navigator.geolocation.getCurrentPosition((position) => {
       dispatch(recieveGeolocationTrigger(position.coords.latitude, position.coords.longitude));
     }, (error) => {
-      console.log('Geolocation error, falling back to ip location.');
-      $.get('http://freegeoip.net/json/', (results) => {
+      console.log('Geolocation error, falling back to IP location.');
+      // $.get('http://freegeoip.net/json/', (results) => {
+      //   dispatch(recieveGeolocationTrigger(results.latitude, results.longitude));
+      // });
+
+      const request = new XMLHttpRequest();
+      request.open('GET', 'http://freegeoip.net/json/', true);
+      request.onload = function() {
+        const results = JSON.parse(this.response);
         dispatch(recieveGeolocationTrigger(results.latitude, results.longitude));
-      });
+      }
+      request.onerror = function() {
+        console.log('IP location failed. Please enable geolocation or manually input a location.');
+      };
+      request.send();
+
     });
   }
 }
@@ -76,16 +88,24 @@ export function searchAgain() {
   return { type: 'SEARCH_AGAIN' };
 }
 
+// export function chooseRestaurant() {
+//   return (dispatch, getState) => {
+//     const max = getState().results.restaurants.length;
+//     if (max === 0) {
+//       dispatch(noResults());
+//     } else {
+//       const chosen = Math.floor(Math.random() * (max - 0)) + 0;
+//       const place_id = getState().results.restaurants[chosen].place_id;
+//       dispatch(displayRestaurant(place_id));
+//     }
+//   }
+// }
+
 export function chooseRestaurant() {
   return (dispatch, getState) => {
-    const max = getState().results.restaurants.length;
-    if (max === 0) {
-      dispatch(noResults());
-    } else {
-      const chosen = Math.floor(Math.random() * (max - 0)) + 0;
-      const place_id = getState().results.restaurants[chosen].place_id;
-      dispatch(displayRestaurant(place_id));
-    }
+    const restaurants = getState().results.restaurants;
+    const chosen = Math.floor(Math.random() * (restaurants.length));
+    dispatch(displayRestaurant(restaurants[chosen].place_id));
   }
 }
 
@@ -140,24 +160,52 @@ export function fetchRestaurantsButton() {
 export function fetchRestaurants() {
   return (dispatch, getState) => {
     const params = getState().params;
-    const options = {
-      location: params.location,
+    const request = {
+      location: new google.maps.LatLng(params.location[0], params.location[1]),
+      radius: Number(params.radius) * 1000,
       openNow: params.openNow,
-      keyword: params.keyword,
-      radius: params.radius,
-      minPriceLevel: params.minPrice,
-      maxPriceLevel: params.maxPrice
+      type: 'restaurant'
     };
-    $.ajax({
-      url: 'http://192.168.1.75:8080/search',
-      type: 'POST',
-      data: JSON.stringify(params),
-      contentType: 'application/json',
-      complete: (results) => {
-        // dispatch(handleParamsChange({id: 'displayOptions', value: false}));
-        dispatch(recieveRestaurants(results.responseJSON));
+    if (params.keyword) {
+      request.name = params.keyword;
+    };
+    if (!(Number(params.minPrice) === 0 && Number(params.maxPrice) === 0)) {
+      request.minPriceLevel = Number(params.minPrice);
+      request.maxPriceLevel = Number(params.maxPrice);
+    };
+    const service = new google.maps.places.PlacesService(document.getElementById('googleMapsAttributions'));
+    service.nearbySearch(request, (results, status) => {
+      if (status == google.maps.places.PlacesServiceStatus.OK) {
+        dispatch(recieveRestaurants(results));
         dispatch(chooseRestaurant());
+      } else {
+        dispatch(noResults());
       }
     });
   }
 }
+
+// export function fetchRestaurants() {
+//   return (dispatch, getState) => {
+//     const params = getState().params;
+//     const options = {
+//       location: params.location,
+//       openNow: params.openNow,
+//       keyword: params.keyword,
+//       radius: params.radius,
+//       minPriceLevel: params.minPrice,
+//       maxPriceLevel: params.maxPrice
+//     };
+//     $.ajax({
+//       url: 'http://192.168.1.75:8080/search',
+//       type: 'POST',
+//       data: JSON.stringify(params),
+//       contentType: 'application/json',
+//       complete: (results) => {
+//         // dispatch(handleParamsChange({id: 'displayOptions', value: false}));
+//         dispatch(recieveRestaurants(results.responseJSON));
+//         dispatch(chooseRestaurant());
+//       }
+//     });
+//   }
+// }
