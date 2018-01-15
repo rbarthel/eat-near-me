@@ -9,7 +9,7 @@ export default function WelcomeMessage(props) {
   }
 
   return (
-    <div>
+    <div className={ props.displayOptions ? 'welcomeMessage' : '' }>
       { message }
     </div>
   )

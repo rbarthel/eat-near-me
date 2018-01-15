@@ -162,7 +162,7 @@ export function fetchRestaurants() {
     const params = getState().params;
     const request = {
       location: new google.maps.LatLng(params.location[0], params.location[1]),
-      radius: Number(params.radius) * 1000,
+      radius: params.radius * 1000,
       openNow: params.openNow,
       type: 'restaurant'
     };
@@ -173,6 +173,7 @@ export function fetchRestaurants() {
       request.minPriceLevel = Number(params.minPrice);
       request.maxPriceLevel = Number(params.maxPrice);
     };
+
     const service = new google.maps.places.PlacesService(document.getElementById('googleMapsAttributions'));
     service.nearbySearch(request, (results, status) => {
       if (status == google.maps.places.PlacesServiceStatus.OK) {

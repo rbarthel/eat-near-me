@@ -16,16 +16,20 @@ export default function SearchForm(props) {
           <div className='optionsSection'>
             <label htmlFor='radius'>How far are you willing to go?</label>&nbsp;<br className='mobileWrap' />
             <input id='radius' type='range' min='1' max='50' value={props.params.radius} onChange={event => props.onParamsChange(event.target, props.params)}></input>
-            {props.params.radius} km
+            <span className='hidden'>{props.params.radius < 10 ? '0' : ''}</span>{props.params.radius} km
           </div>
           <div className='optionsSection'>
-            &nbsp;<label htmlFor='minPrice'>Minimum Price</label>&nbsp;<br className='mobileWrap' />
-            <input id='minPrice' type='range' min='0' max='4' value={props.params.minPrice} onChange={event => props.onParamsChange(event.target, props.params)}></input>
+            &nbsp;<label htmlFor='minPrice'>Minimum Price</label>
+            <br className='mobileWrap' />
+            <span className='mobileWrap hidden'>$$$$</span>
+            &nbsp;<input id='minPrice' type='range' min='0' max='4' value={props.params.minPrice} onChange={event => props.onParamsChange(event.target, props.params)}></input>
             &nbsp;{'$'.repeat(props.params.minPrice)}<span className='hidden'>{'$'.repeat(4 - props.params.minPrice)}</span>
           </div>
           <div className='optionsSection'>
-            <label htmlFor='maxPrice'>Maximum Price</label>&nbsp;<br className='mobileWrap' />
-            <input id='maxPrice' type='range' min='0' max='4' value={props.params.maxPrice} onChange={event => props.onParamsChange(event.target, props.params)}></input>
+            <label htmlFor='maxPrice'>Maximum Price</label>
+            <br className='mobileWrap' />
+            <span className='mobileWrap hidden'>$$$$</span>
+            &nbsp;<input id='maxPrice' type='range' min='0' max='4' value={props.params.maxPrice} onChange={event => props.onParamsChange(event.target, props.params)}></input>
             &nbsp;{'$'.repeat(props.params.maxPrice)}<span className='hidden'>{'$'.repeat(4 - props.params.maxPrice)}</span>
           </div>
           <div className='optionsSection'>

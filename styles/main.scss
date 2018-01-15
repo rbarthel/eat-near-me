@@ -36,6 +36,12 @@ body {
   }
 }
 
+.welcomeMessage {
+  @media (max-height: 530px) {
+    display: none;
+  }
+}
+
 #mapsiframe {
   width: 100%;
   height: calc(100% - 100px);

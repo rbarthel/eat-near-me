@@ -6,7 +6,7 @@ import NoResults from '../components/NoResults.jsx';
 import WelcomeMessage from '../components/WelcomeMessage.jsx';
 
 const mapStateToProps = state => {
-  return state.results;
+  return state;
 }
 
 const mapDispatchToProps = dispatch => {
@@ -19,13 +19,12 @@ const mapDispatchToProps = dispatch => {
 }
 
 class Display extends Component {
-
   render() {
     return (
       <div>
-        <NoResults display={ this.props.noResults }/>
-        <DisplayRestaurant { ...this.props } />
-        <WelcomeMessage display={ !Object.keys(this.props.display).length && !this.props.noResults }/>
+        <NoResults display={ this.props.results.noResults }/>
+        <DisplayRestaurant { ...this.props.results } />
+        <WelcomeMessage displayOptions={this.props.params.displayOptions} display={ !Object.keys(this.props.results.display).length && !this.props.results.noResults } />
       </div>
     )
   }

@@ -13,6 +13,9 @@
     white-space: nowrap;
     margin: 10px auto;
     padding: 20px;
+    @media (max-height: 530px) {
+      margin-bottom: 0;
+    }
     @media (min-width: 490px) {
       border-radius: 5px;
     }
