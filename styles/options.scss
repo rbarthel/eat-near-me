@@ -1,11 +1,23 @@
 .searchForm {
-  padding-top: 15vh;
+  @media (min-width: 440px) {
+    padding-top: 18vh;
+  }
+  @media (max-width: 440px) {
+    padding-top: 6vh;
+  }
+  @media (max-height: 530px) {
+    padding-top: 10px;
+  }
   .displayOptions {
     background-color: $secondary-colour;
+    white-space: nowrap;
     margin: 10px auto;
     padding: 20px;
-    border-radius: 5px;
-    width: 450px;
+    @media (min-width: 490px) {
+      border-radius: 5px;
+    }
+    width: calc(100% - 40px);
+    max-width: 450px;
     #location {
       display: flex;
       width: 100%;
@@ -35,6 +47,16 @@
       border-radius: 4px;
       border: 2px solid $border-colour;
       padding: 1px 4px;
+    }
+    .optionsSection {
+      @media (max-width: 440px) {
+        padding-top: 8px;
+      }
+    }
+    .mobileWrap {
+      @media (min-width: 440px) {
+        display: none;
+      }
     }
   }
 }
