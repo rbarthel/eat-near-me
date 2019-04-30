@@ -50,27 +50,27 @@ export function getLocationAutocomplete(place) {
 export function fetchGeolocation() {
   return (dispatch) => {
     dispatch(recieveGeolocation('49.229874', '-123.101706', false));
-    // dispatch(requestGeolocation());
-    // return navigator.geolocation.getCurrentPosition((position) => {
-    //   dispatch(recieveGeolocationTrigger(position.coords.latitude, position.coords.longitude));
-    // }, (error) => {
-    //   console.log('Geolocation error, falling back to IP location.');
-    //   // $.get('http://freegeoip.net/json/', (results) => {
-    //   //   dispatch(recieveGeolocationTrigger(results.latitude, results.longitude));
-    //   // });
+    dispatch(requestGeolocation());
+    return navigator.geolocation.getCurrentPosition((position) => {
+      dispatch(recieveGeolocationTrigger(position.coords.latitude, position.coords.longitude));
+    }, (error) => {
+      console.log('Geolocation error, falling back to IP location.');
+      // $.get('http://freegeoip.net/json/', (results) => {
+      //   dispatch(recieveGeolocationTrigger(results.latitude, results.longitude));
+      // });
 
-    //   const request = new XMLHttpRequest();
-    //   request.open('GET', 'http://freegeoip.net/json/', true);
-    //   request.onload = function() {
-    //     const results = JSON.parse(this.response);
-    //     dispatch(recieveGeolocationTrigger(results.latitude, results.longitude));
-    //   }
-    //   request.onerror = function() {
-    //     console.log('IP location failed. This can be caused by a script blocking plugin such as uBlock.');
-    //   };
-    //   request.send();
+      const request = new XMLHttpRequest();
+      request.open('GET', 'http://freegeoip.net/json/', true);
+      request.onload = function() {
+        const results = JSON.parse(this.response);
+        dispatch(recieveGeolocationTrigger(results.latitude, results.longitude));
+      }
+      request.onerror = function() {
+        console.log('IP location failed. This can be caused by a script blocking plugin such as uBlock.');
+      };
+      request.send();
 
-    // });
+    });
   }
 }
 
