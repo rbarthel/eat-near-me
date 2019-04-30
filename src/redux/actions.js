@@ -49,27 +49,28 @@ export function getLocationAutocomplete(place) {
 
 export function fetchGeolocation() {
   return (dispatch) => {
-    dispatch(requestGeolocation());
-    return navigator.geolocation.getCurrentPosition((position) => {
-      dispatch(recieveGeolocationTrigger(position.coords.latitude, position.coords.longitude));
-    }, (error) => {
-      console.log('Geolocation error, falling back to IP location.');
-      // $.get('http://freegeoip.net/json/', (results) => {
-      //   dispatch(recieveGeolocationTrigger(results.latitude, results.longitude));
-      // });
+    dispatch(recieveGeolocation('49.229874', '-123.101706', false));
+    // dispatch(requestGeolocation());
+    // return navigator.geolocation.getCurrentPosition((position) => {
+    //   dispatch(recieveGeolocationTrigger(position.coords.latitude, position.coords.longitude));
+    // }, (error) => {
+    //   console.log('Geolocation error, falling back to IP location.');
+    //   // $.get('http://freegeoip.net/json/', (results) => {
+    //   //   dispatch(recieveGeolocationTrigger(results.latitude, results.longitude));
+    //   // });
 
-      const request = new XMLHttpRequest();
-      request.open('GET', 'http://freegeoip.net/json/', true);
-      request.onload = function() {
-        const results = JSON.parse(this.response);
-        dispatch(recieveGeolocationTrigger(results.latitude, results.longitude));
-      }
-      request.onerror = function() {
-        console.log('IP location failed. Please enable geolocation or manually input a location.');
-      };
-      request.send();
+    //   const request = new XMLHttpRequest();
+    //   request.open('GET', 'http://freegeoip.net/json/', true);
+    //   request.onload = function() {
+    //     const results = JSON.parse(this.response);
+    //     dispatch(recieveGeolocationTrigger(results.latitude, results.longitude));
+    //   }
+    //   request.onerror = function() {
+    //     console.log('IP location failed. This can be caused by a script blocking plugin such as uBlock.');
+    //   };
+    //   request.send();
 
-    });
+    // });
   }
 }
 
@@ -88,19 +89,6 @@ export function searchAgain() {
   return { type: 'SEARCH_AGAIN' };
 }
 
-// export function chooseRestaurant() {
-//   return (dispatch, getState) => {
-//     const max = getState().results.restaurants.length;
-//     if (max === 0) {
-//       dispatch(noResults());
-//     } else {
-//       const chosen = Math.floor(Math.random() * (max - 0)) + 0;
-//       const place_id = getState().results.restaurants[chosen].place_id;
-//       dispatch(displayRestaurant(place_id));
-//     }
-//   }
-// }
-
 export function chooseRestaurant() {
   return (dispatch, getState) => {
     const restaurants = getState().results.restaurants;
@@ -108,28 +96,6 @@ export function chooseRestaurant() {
     dispatch(displayRestaurant(restaurants[chosen].place_id));
   }
 }
-
-// export function chooseRestaurant() {
-//   return (dispatch, getState) => {
-//     const max = getState().results.restaurants.length;
-//     if (max === 0) {
-//       // dispatch(displayRestaurant({}));
-//       dispatch(noResults());
-//     } else {
-//       const chosen = Math.floor(Math.random() * (max - 0)) + 0;
-//       const place_id = getState().results.restaurants[chosen].place_id;
-//       $.ajax({
-//         url: 'http://localhost:8080/details',
-//         type: 'POST',
-//         data: JSON.stringify({place_id: place_id}),
-//         contentType: 'application/json',
-//         complete: (results) => {
-//           dispatch(displayRestaurant(results.responseJSON));
-//         }
-//       });
-//     }
-//   }
-// }
 
 export function requestRestaurants() {
   return { type: 'REQUEST_RESTAURANTS' };
@@ -185,28 +151,3 @@ export function fetchRestaurants() {
     });
   }
 }
-
-// export function fetchRestaurants() {
-//   return (dispatch, getState) => {
-//     const params = getState().params;
-//     const options = {
-//       location: params.location,
-//       openNow: params.openNow,
-//       keyword: params.keyword,
-//       radius: params.radius,
-//       minPriceLevel: params.minPrice,
-//       maxPriceLevel: params.maxPrice
-//     };
-//     $.ajax({
-//       url: 'http://192.168.1.75:8080/search',
-//       type: 'POST',
-//       data: JSON.stringify(params),
-//       contentType: 'application/json',
-//       complete: (results) => {
-//         // dispatch(handleParamsChange({id: 'displayOptions', value: false}));
-//         dispatch(recieveRestaurants(results.responseJSON));
-//         dispatch(chooseRestaurant());
-//       }
-//     });
-//   }
-// }

@@ -63,6 +63,7 @@ function results(
   },
   action
 ) {
+  console.log(action.type);
   switch(action.type) {
     case 'REQUEST_RESTAURANTS':
       return Object.assign({}, state, {
